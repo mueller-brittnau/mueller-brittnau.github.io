@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Müller-Brittnau</title>
+    <script type="text/javascript" src="js/d3-3.5.16.min.js"></script>
+    <script type="text/javascript" src="js/d3-random.v0.2.min.js"></script>
+    <style>
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="stripes">
+</div>
+
+<script type="text/javascript">
+
+    var colors = [
+        "#294877",
+        "#E7797C",
+        "#75B232",
+        "#FEBC22",
+        "#F46B20",
+        "#85CECA",
+        "#337726",
+        "#D63F23",
+        "#192D1E"];
+
+    var randomColor = function () {
+        return colors[Math.floor(Math.random() * colors.length)]
+    };
+
+    var randomHeight = function() {
+        return d3_random.randomExponential(1/30)() + "px";
+    };
+
+    var data = new Array(100);
+
+    d3.select(".stripes").selectAll("div").data(data).enter().append("div")
+            .style("background-color", function (d) {
+                return randomColor()
+            })
+            .style("height", function (d) {
+                return randomHeight()
+            })
+
+</script>
+
+</html>
