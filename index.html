@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon image_src" href="apple-touch-icon.png">
     <title>Müller-Brittnau</title>
     <script type="text/javascript" src="js/d3-3.5.16.min.js"></script>
     <script type="text/javascript" src="js/d3-random.v0.2.min.js"></script>
@@ -15,7 +17,7 @@
 
         .stripes {
             max-height: 100vh;
-            overflow:hidden;
+            overflow: hidden;
         }
 
         .address {
@@ -88,23 +90,27 @@
 
     var stripes = d3.select(".stripes").selectAll("div").data(data);
 
-    stripes.filter(function (d, i) {
-        return i != 2
-    })
-            .style("height", function (d, i) {
-                return randomHeight()
-            })
-            .style("background-color", function () {
-                return randomColor()
-            });
+    var applyStripeStyle = function (selection) {
+        selection
+                .style("height", function (d, i) {
+                    return randomHeight()
+                })
 
-    stripes.enter().append("div")
-            .style("background-color", function () {
-                return randomColor()
-            })
-            .style("height", function () {
-                return randomHeight()
-            });
+                .style("background-color", function () {
+                    return randomColor()
+                });
+    };
+
+    // fixed stripes before white address
+    var firstTwoStripes = stripes.filter(function (d, i) {
+        return i != 2
+    });
+
+    // 97 dynamically appended stripes
+    var generatedStripes = stripes.enter().append("div");
+
+    applyStripeStyle(firstTwoStripes);
+    applyStripeStyle(generatedStripes);
 
 </script>
 </body>
