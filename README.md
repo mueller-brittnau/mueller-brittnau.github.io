@@ -1,1 +1,1 @@
-# mueller-brittnau.github.io
+http://mueller-brittnau.ch
